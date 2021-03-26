@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 // import { gsap, TweenMax, Linear, Sine } from 'gsap';
 import { gsap } from 'gsap';
 import { parse } from 'query-string';
+import GlobalStore from 'app/layout/global-store';
 
-const menus = [
-  {
-    code: 'mine',
-    name: 'Mine',
-    order: 1,
-  },
-  {
-    code: 'home',
-    name: 'Home',
-    order: 2,
-  },
-  {
-    code: 'mall',
-    name: 'Mall',
-    order: 3,
-  },
-];
+interface IMenu {
+  code: string;
+  name: string;
+  order: number;
+  link: string;
+}
+
+// const menus = [
+//   {
+//     code: 'mine',
+//     name: 'Mine',
+//     order: 1,
+//   },
+//   {
+//     code: 'home',
+//     name: 'Home',
+//     order: 2,
+//   },
+//   {
+//     code: 'mall',
+//     name: 'Mall',
+//     order: 3,
+//   },
+// ];
 
 /**
  * curActive: [Left, Top, Right]
@@ -48,7 +57,19 @@ const LEFT = 0;
 const TOP = 1;
 const RIGHT = 2;
 
-export default function Footer(): JSX.Element {
+export default withRouter(Footer);
+
+function Footer(props: RouteComponentProps): JSX.Element {
+  const { history } = props;
+  const { apps, currentApp } = GlobalStore.useContainer();
+  const menus: IMenu[] = apps.map(({ code, title, link }, index) => {
+    return {
+      code,
+      name: title || '',
+      order: index + 1,
+      link: link || '',
+    };
+  });
   const { page = 'home' } = parse(location.search);
   const curMenu = menus.find(item => item.code === page);
   const initialOrder: number[] = orderMap[curMenu?.order || 2];
@@ -126,34 +147,10 @@ export default function Footer(): JSX.Element {
     setOpen(false);
   }
 
-  function handleClickMenuItem(order: number): void {
+  function handleClickMenuItem({ link, order }: IMenu): void {
     if (open) {
-      animate(animateMap[`${activeOrder}-${order}`]);
+      history.push(link);
       setActiveOrder(order);
-    }
-  }
-
-  function animate(animateType: AnimateType): void {
-    // const r = 150;
-    if (animateType === AnimateType.CLOCKWISE) {
-      // TweenMax.to('#menu-item-1', 1, {
-      //   // y: r,
-      //   // x: r,
-      //   left: '75px',
-      //   // top: '15px',
-      //   repeat: 0,
-      //   ease: Sine.easeInOut,
-      // });
-      // TweenMax.to('#menu-item-1', 1, {
-      //   // y: r,
-      //   // x: r,
-      //   // left: '75px',
-      //   top: '15px',
-      //   repeat: 0,
-      //   ease: Sine.easeInOut,
-      // });
-    } else if (animateType === AnimateType.COUNTER_CLOCKWISE) {
-
     }
   }
 
@@ -161,7 +158,7 @@ export default function Footer(): JSX.Element {
     return (
       <div className="menu-container">
         {
-          initialOrder.map((order, position) => {
+          (orderMap[activeOrder] as number[]).map((order, position) => {
             const classNameMap = {
               [LEFT]: 'menu-left',
               [TOP]: 'menu-top',
@@ -172,9 +169,8 @@ export default function Footer(): JSX.Element {
             return menu ? (
               <span
                 key={menu.code}
-                id={`menu-item-${menu.order}`}
                 className={`menu-item ${classNameMap[position]}`}
-                onClick={() => handleClickMenuItem(order)}
+                onClick={() => handleClickMenuItem(menu)}
               >
                 {menu.name}
               </span>

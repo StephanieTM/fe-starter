@@ -40,6 +40,17 @@ const pcRoutes: IRouteConfig[] = [
 
 const mobileRoutes: IRouteConfig[] = [
   {
+    title: 'Mine',
+    code: 'mine',
+    children: [
+      {
+        title: 'Mine',
+        link: '/mine',
+        component: (): ILoadComponent => import('src/mobile/mine'),
+      },
+    ],
+  },
+  {
     title: 'Home',
     code: 'home',
     children: [
@@ -58,17 +69,6 @@ const mobileRoutes: IRouteConfig[] = [
         title: 'Mall',
         link: '/mall',
         component: (): ILoadComponent => import('src/mobile/mall'),
-      },
-    ],
-  },
-  {
-    title: 'Mine',
-    code: 'mine',
-    children: [
-      {
-        title: 'Mine',
-        link: '/mine',
-        component: (): ILoadComponent => import('src/mobile/mine'),
       },
     ],
   },

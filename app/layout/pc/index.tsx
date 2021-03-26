@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { Spin } from 'antd';
+import { IRouteConfig } from 'app/routers/routes';
 import Header from './Header';
 import './index.less';
 
-export default function Layout(): JSX.Element {
+interface IPCLayoutProps {
+  routes: IRouteConfig[];
+}
+
+export default function Layout(props: IPCLayoutProps): JSX.Element {
+  const { routes } = props;
+
+  console.log('routes :>> ', routes);
+
   return (
     <div className="app-container">
       <Header />
@@ -13,9 +24,15 @@ export default function Layout(): JSX.Element {
           </div>
         </div>
         <div className="app-content">
-          <div>
-            content
-          </div>
+          <Suspense fallback={<Spin spinning tip="Loading..." />}>
+            <Switch>
+              {
+                routes.map(route => (route.component && route.link) ?
+                  <Route key={route.link} exact path={route.link} component={lazy(route.component)} /> :
+                  null)
+              }
+            </Switch>
+          </Suspense>
         </div>
       </div>
     </div>
