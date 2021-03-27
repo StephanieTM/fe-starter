@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAsyncRetry } from 'react-use';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Button, message, Table, Space, Modal } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import mutateUser from './mutateUser';
@@ -29,13 +29,13 @@ export default function BackendDemo(): JSX.Element {
     title: 'Created At',
     dataIndex: 'createdAt',
     render: (text): string => {
-      return moment(text).format('YYYY-MM-DD HH:mm:ss');
+      return dayjs(text).format('YYYY-MM-DD HH:mm:ss');
     },
   }, {
     title: 'Updated At',
     dataIndex: 'updatedAt',
     render: (text): string => {
-      return moment(text).format('YYYY-MM-DD HH:mm:ss');
+      return dayjs(text).format('YYYY-MM-DD HH:mm:ss');
     },
   }, {
     title: 'Action',
@@ -93,7 +93,7 @@ export default function BackendDemo(): JSX.Element {
       <Table
         rowKey="id"
         loading={loading}
-        dataSource={userList}
+        dataSource={userList || []}
         columns={columns}
       />
     </div>
