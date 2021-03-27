@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -102,23 +101,6 @@ module.exports = {
       patterns: [
         { from: 'assets/images', to: 'assets/images' },
       ],
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        configFile: './tsconfig.json',
-        diagnosticOptions: {
-          semantic: true,
-          syntactic: true,
-        },
-        mode: 'write-references',
-      },
-      eslint: {
-        enabled: true,
-        files: [
-          './app/**/*.{ts,tsx}',
-          './src/**/*.{ts,tsx}',
-        ],
-      },
     }),
     new AntdDayjsWebpackPlugin(),
     new webpack.ProgressPlugin({ profile: false }),

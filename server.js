@@ -10,7 +10,6 @@ app.use(express.static(staticRoot));
 app.use('/api', createProxyMiddleware({
   target: 'http://127.0.0.1:3002',
   changeOrigin: true,
-  ws: true,
 }));
 
 app.get('/*', (req, res) => {
