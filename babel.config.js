@@ -8,6 +8,7 @@ module.exports = (api) => {
   ];
 
   const plugins = [
+    ['import', { libraryName: 'antd', style: true }, 'antd'],
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-runtime',
     isProd ? null : 'react-hot-loader/babel'
