@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-export type ILoadComponent = Promise<{ default: ComponentType<any>}>;
+export type ILoadComponent = Promise<{ default: ComponentType<JSX.Element>}>;
 
 export interface IRouteConfig {
   title: string;
