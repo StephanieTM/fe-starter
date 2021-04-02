@@ -21,10 +21,8 @@ function getRoutes(allRouters: IRouteConfig[]): IRouteConfig[] {
 }
 
 export default function AppLayout(): JSX.Element {
-  const { isMobile, apps } = GlobalStore.useContainer();
+  const { isMobile } = GlobalStore.useContainer();
   const routes = getRoutes(isMobile ? mobileRoutes : pcRoutes);
-
-  console.log('apps :>> ', apps);
 
   return (
     <Router>
