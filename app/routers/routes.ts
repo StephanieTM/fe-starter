@@ -1,6 +1,7 @@
 import { ComponentType } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-export type ILoadComponent = Promise<{ default: ComponentType<JSX.Element>}>;
+export type ILoadComponent = Promise<{ default: ComponentType<RouteComponentProps>}>;
 
 export interface IRouteConfig {
   title: string;
