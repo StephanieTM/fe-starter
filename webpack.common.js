@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
@@ -90,13 +89,6 @@ module.exports = {
   plugins: [
     // clean dir before build
     new CleanWebpackPlugin(),
-    // generate index.html file
-    new HtmlWebpackPlugin({
-      filename: 'views/index.html',
-      hash: true,
-      inject: false,
-      template: './app/views/index.ejs',
-    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'assets/images', to: 'assets/images' },

@@ -25,7 +25,7 @@ export default function AppLayout(): JSX.Element {
   const routes = getRoutes(isMobile ? mobileRoutes : pcRoutes);
 
   return (
-    <Router>
+    <Router basename="/fe-starter">
       {isMobile ? <MobileLayout routes={routes} /> : <PCLayout routes={routes} />}
     </Router>
   );
