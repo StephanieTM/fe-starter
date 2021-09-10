@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Mine(): JSX.Element {
+export default function Projects(): JSX.Element {
   return (
     <div>
-      Mine
+      Projects
     </div>
   );
 }

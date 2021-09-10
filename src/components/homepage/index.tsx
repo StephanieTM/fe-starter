@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function HelloWorld(): JSX.Element {
+export default function Homepage(): JSX.Element {
   const [contentSwitch, setContentSwitch] = useState<boolean>(false);
 
   function handleSwitch() {

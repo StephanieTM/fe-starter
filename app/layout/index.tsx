@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { IRouteConfig, mobileRoutes, pcRoutes } from 'app/routers/routes';
-import GlobalStore from './global-store';
-import PCLayout from './pc';
-import MobileLayout from './mobile';
+import { IRouteConfig, routes } from 'app/routers/routes';
+import Header from './Header';
+import Body from './Body';
+import './index.less';
 
 function getRoutes(allRouters: IRouteConfig[]): IRouteConfig[] {
   const getFlattenRoutes = (routeItem: IRouteConfig[] = allRouters, result: IRouteConfig[] = []): IRouteConfig[] => {
@@ -21,12 +20,12 @@ function getRoutes(allRouters: IRouteConfig[]): IRouteConfig[] {
 }
 
 export default function AppLayout(): JSX.Element {
-  const { isMobile } = GlobalStore.useContainer();
-  const routes = getRoutes(isMobile ? mobileRoutes : pcRoutes);
+  const flattenRoutes = getRoutes(routes);
 
   return (
-    <Router basename="/fe-starter">
-      {isMobile ? <MobileLayout routes={routes} /> : <PCLayout routes={routes} />}
-    </Router>
+    <div className="app-container">
+      <Header />
+      <Body routes={flattenRoutes} />
+    </div>
   );
 }
