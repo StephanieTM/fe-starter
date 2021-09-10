@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { hot } from 'react-hot-loader/root';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { configAxios } from './utils/axios-config';
+import { theme } from './theme';
+import { configAxios } from './config/axios-config';
 import AppLayout from './layout';
 import GlobalStore from './layout/global-store';
 import './index.less';
@@ -14,7 +17,11 @@ dayjs.locale('zh-cn');
 function App(): JSX.Element {
   return (
     <GlobalStore.Provider>
-      <AppLayout />
+      <ChakraProvider theme={theme}>
+        <Router>
+          <AppLayout />
+        </Router>
+      </ChakraProvider>
     </GlobalStore.Provider>
   );
 }

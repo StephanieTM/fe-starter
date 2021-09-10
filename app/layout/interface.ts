@@ -16,3 +16,7 @@ export interface IApplication extends IRouteConfig {
   code: string;
   key: string;
 }
+
+export interface IBodyProps {
+  routes: IRouteConfig[];
+}
