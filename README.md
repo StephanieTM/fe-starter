@@ -26,7 +26,7 @@
     - start developing
 
 - Production
-  - Server production app with node web server
+  - Serve production app with node web server
     - execute command `yarn` to install dependencies
     - execute command `yarn run build` to generate bundle files
     - execute command `yarn run server` to start web server on which bundled files would be hosted
@@ -34,7 +34,9 @@
 
 - PORT can be modified at `env.js`
 
-### github-page
+### github-pages
+
+**Note: To make github-pages-auto-publish service work as intended, GitHub Pages of your account need to be enabled first, get more infos [here](https://pages.github.com/).**
 
 - For sub-projects (`https://your-user-name.github.io/your-sub-repo-name/`)
   - rename dir `.github.temp` to `.github`
@@ -50,7 +52,7 @@
   - commit changes above and push your code to master branch
   - go to github repository - settings - pages - source, select `github-page` branch
 
-- Branches used as codebase and built-bundle can be set at `.github-temp/workflows/deploy.yml`
+- Which branches to use as codebase and built-assets can be set at `.github-temp/workflows/deploy.yml`
 
 ## Details
 
